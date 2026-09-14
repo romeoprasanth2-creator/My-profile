@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Prasanth Digital App</title>
+    <title>Prasanth Premium App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-            background-color: #0d1117; 
+            background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
@@ -15,70 +15,93 @@
             color: #ffffff;
         }
         .app-container {
-            background-color: #161b22;
-            padding: 30px 20px;
-            border-radius: 20px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            background: rgba(22, 27, 34, 0.85);
+            padding: 40px 25px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(88, 166, 255, 0.1);
             text-align: center;
             max-width: 360px;
             width: 90%;
-            border: 1px solid #30363d;
+            border: 1px solid rgba(48, 54, 61, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        /* நியான் விளக்கு அனிமேஷன் வளையம் */
+        .avatar-wrapper {
+            position: relative;
+            width: 105px;
+            height: 105px;
+            margin: 0 auto 20px auto;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00f2fe, #4facfe, #0000ff);
+            padding: 3px;
+            animation: glowRotate 3s linear infinite;
         }
         .avatar-img {
-            width: 95px;
-            height: 95px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            margin: 0 auto 15px auto;
             object-fit: cover;
-            border: 3px solid #58a6ff;
-            box-shadow: 0 0 15px rgba(88, 166, 255, 0.4);
+            background: #161b22;
             display: block;
         }
+        @keyframes glowRotate {
+            0% { transform: rotate(0deg); box-shadow: 0 0 15px #00f2fe; }
+            50% { box-shadow: 0 0 25px #4facfe; }
+            100% { transform: rotate(360deg); box-shadow: 0 0 15px #00f2fe; }
+        }
         h1 {
-            font-size: 22px;
+            font-size: 24px;
+            font-weight: 700;
             margin: 10px 0 5px 0;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #ffffff, #8b949e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .bio {
             color: #8b949e;
             font-size: 14px;
-            margin-bottom: 25px;
-            line-height: 1.5;
+            margin-bottom: 30px;
+            line-height: 1.6;
         }
         .links-group {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
         }
         .app-link {
-            background-color: #21262d;
+            background: linear-gradient(135deg, #21262d 0%, #161b22 100%);
             color: #58a6ff;
             text-decoration: none;
-            padding: 14px;
-            border-radius: 12px;
+            padding: 16px;
+            border-radius: 14px;
             font-size: 15px;
             font-weight: 600;
-            border: 1px solid #30363d;
-            transition: all 0.3s ease;
+            border: 1px solid rgba(48, 54, 61, 0.5);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
             display: block;
         }
         .app-link:hover {
-            background-color: #30363d;
+            border: 1px solid #58a6ff;
             color: #ffffff;
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 5px 15px rgba(88, 166, 255, 0.2);
         }
         .footer-text {
-            margin-top: 30px;
+            margin-top: 35px;
             font-size: 11px;
             color: #8b949e;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        <!-- நீங்கள் அப்லோட் செய்த myphoto.JPG கோப்புப் பெயர் இங்கே சரியாக இணைக்கப்பட்டுள்ளது -->
-        <img src="myphoto.JPG" alt="Prasanth" class="avatar-img">
+        <!-- அனிமேஷன் வளையத்துடன் கூடிய உங்களது புகைப்படம் -->
+        <div class="avatar-wrapper">
+            <img src="myphoto.JPG" alt="Prasanth" class="avatar-img">
+        </div>
         
         <h1>PRASANTH GOD</h1>
         <p class="bio">Mobile Coding Explorer 📱<br>Naan Koder App வழியா கோடிங் கத்துக்கிட்டு உருவாக்கிய சொந்த ஆப்!</p>
