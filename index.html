@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-            background-color: #0d1117; /* ஒரு ஸ்டைலான டார்க் மோட் பின்னணி */
+            background-color: #0d1117; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
@@ -24,19 +24,15 @@
             width: 90%;
             border: 1px solid #30363d;
         }
-        .avatar {
-            width: 90px;
-            height: 90px;
-            background-color: #58a6ff;
+        .avatar-img {
+            width: 95px;
+            height: 95px;
             border-radius: 50%;
             margin: 0 auto 15px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 36px;
-            font-weight: bold;
-            color: #0d1117;
+            object-fit: cover;
+            border: 3px solid #58a6ff;
             box-shadow: 0 0 15px rgba(88, 166, 255, 0.4);
+            display: block;
         }
         h1 {
             font-size: 22px;
@@ -75,28 +71,19 @@
             margin-top: 30px;
             font-size: 11px;
             color: #8b949e;
-        .avatar-img {
-    width: 95px;
-    height: 95px;
-    border-radius: 50%;
-    margin: 0 auto 15px auto;
-    object-fit: cover;
-    border: 3px solid #58a6ff;
-    box-shadow: 0 0 15px rgba(88, 166, 255, 0.4);
-    display: block;
-}
-
+        }
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        <!-- ப்ரொஃபைல் லோகோ (வட்ட வடிவில் பி என்ற எழுத்து https://ibb.co/ZpDPBB4v
+        <!-- உங்கள் GitHub ப்ரொஃபைல் புகைப்படம் இங்கே வரும் -->
+        <img src="https://github.com" alt="Prasanth" class="avatar-img">
+        
         <h1>PRASANTH GOD</h1>
         <p class="bio">Mobile Coding Explorer 📱<br>Naan Koder App வழியா கோடிங் கத்துக்கிட்டு உருவாக்கிய சொந்த ஆப்!</p>
         
         <div class="links-group">
-            <!-- உங்களது உண்மையான லிங்க்குகளை கீழே உள்ள href-ல் மாற்றிக் கொள்ளலாம் -->
             <a href="https://instagram.com" target="_blank" class="app-link">My Instagram 📸</a>
             <a href="https://github.com" target="_blank" class="app-link">My GitHub Projects 💻</a>
             <a href="https://youtube.com" target="_blank" class="app-link">My YouTube Channel 🎥</a>
