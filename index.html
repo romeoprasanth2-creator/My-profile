@@ -29,13 +29,15 @@
             0% { transform: translate(0, 0); }
             100% { transform: translate(-50px, -50px); }
         }
+        
+        /* மெயின் ஆப் செல் */
         .phone-shell {
             background: rgba(15, 23, 42, 0.85);
-            border-radius: 40px;
+            border-radius: 36px;
             box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 40px rgba(56, 189, 248, 0.25);
             max-width: 360px;
             width: 92%;
-            height: 640px;
+            height: 620px;
             border: 2px solid rgba(56, 189, 248, 0.3);
             backdrop-filter: blur(25px);
             display: flex;
@@ -45,7 +47,7 @@
             z-index: 1;
         }
         
-        /* 🚀 CSS மூலம் தானாக மறையும் ஸ்பிளாஷ் ஸ்கிரீன் */
+        /* லோடிங் பார் ஸ்கிரீன் */
         .splash-screen {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -55,7 +57,7 @@
             justify-content: center;
             align-items: center;
             z-index: 10;
-            animation: hideSplash 0.4s ease-in-out 1.5s forwards;
+            animation: hideSplash 0.4s ease-in-out 1.2s forwards;
         }
         .loader-bar {
             width: 150px; height: 4px; background: rgba(255,255,255,0.1);
@@ -63,7 +65,7 @@
         }
         .loader-fill {
             width: 0%; height: 100%; background: #38bdf8;
-            animation: load 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation: load 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
         @keyframes load { to { width: 100%; } }
         @keyframes hideSplash { to { opacity: 0; visibility: hidden; pointer-events: none; } }
@@ -80,24 +82,24 @@
             border-bottom: 1px solid rgba(56, 189, 248, 0.15);
         }
 
-        /* கன்டென்ட் ஏரியா */
+        /* கன்டென்ட் விண்டோ - பாட்டம் பாருக்கு மேலே கச்சிதமாக நிக்கும் */
         .app-content {
             padding: 20px;
             flex-grow: 1;
             overflow-y: auto;
-            margin-bottom: 70px; /* பாட்டம் பாருக்காக இடம் */
+            height: calc(100% - 110px); 
         }
         
-        /* CSS டேப் சிஸ்டம் லாஜிக் (நோ ஜாவாஸ்கிரிப்ட் லாக்) */
-        .tab-content { display: none; animation: fadeIn 0.4s ease forwards; }
+        /* பக்கா சிஎஸ்எஸ் டேப் சுவிட்ச்சிங் */
+        .tab-content { display: none; animation: fadeIn 0.3s ease forwards; }
         #tab1:checked ~ .app-content #homeTab,
         #tab2:checked ~ .app-content #projectsTab,
         #tab3:checked ~ .app-content #skillsTab,
         #tab4:checked ~ .app-content #contactTab { display: block; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* ப்ரொஃபைல் விட்ஜெட் */
+        /* ப்ரொஃபைல் கார்டு விட்ஜெட் */
         .profile-widget {
             background: rgba(30, 41, 59, 0.5);
             border-radius: 20px;
@@ -112,8 +114,9 @@
             width: 65px; height: 65px; border-radius: 50%;
             background: linear-gradient(45deg, #00f2fe, #6366f1);
             padding: 2px; flex-shrink: 0;
+            display: flex; justify-content: center; align-items: center;
         }
-        .avatar-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #0f172a; display: block; }
+        .avatar-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
         
         /* மியூசிக் விட்ஜெட் */
         .music-widget {
@@ -130,81 +133,81 @@
         .bar { width: 3px; height: 5px; background: #38bdf8; animation: bounce 0.6s ease infinite alternate; }
         @keyframes bounce { 100% { height: 20px; } }
 
-        /* கார்டு மற்றும் லிஸ்டுகள் */
+        /* கார்டுகள் */
         .section-title { font-size: 17px; color: #38bdf8; margin-bottom: 15px; font-weight: 700; }
         .list-card {
             background: rgba(30, 41, 59, 0.6); padding: 14px; border-radius: 16px;
             margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.05);
             text-decoration: none; color: white; display: block;
-            transition: all 0.3s ease;
         }
-        .list-card:hover { border: 1px solid #38bdf8; transform: translateY(-2px); }
         .list-card h4 { margin: 0 0 5px 0; color: #38bdf8; font-size: 14px; }
         .list-card p { margin: 0; font-size: 12.5px; color: #94a3b8; line-height: 1.5; }
 
-        /* ஸ்கில்ஸ் பார் */
+        /* ஸ்கில்ஸ் */
         .skill-item { margin-bottom: 15px; }
         .skill-info { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px; }
         .bar-bg { background: rgba(255,255,255,0.1); height: 7px; border-radius: 5px; overflow: hidden; }
         .bar-fill { height: 100%; background: linear-gradient(to right, #00f2fe, #4facfe); }
 
-        /* 📱 பாட்டம் நேவிகேஷன் பார் (ரேடியோ பட்டன் வடிவமைப்பு) */
+        /* 📱 பாட்டம் நேவிகேஷன் பார் - கன்டென்டுக்கு வெளியே தனியாக கீழே நிக்கும் */
         input[type="radio"] { display: none; }
         .bottom-nav {
             position: absolute; bottom: 0; left: 0; width: 100%;
             background: #090d16;
             display: flex; justify-content: space-around;
-            padding: 12px 0 16px 0;
-            border-top: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 0 0 40px 40px;
+            padding: 14px 0 18px 0;
+            border-top: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 0 0 36px 36px;
             z-index: 5;
+            box-sizing: border-box;
         }
         .nav-btn {
             color: #64748b; font-size: 11px; font-weight: 600;
             cursor: pointer; display: flex; flex-direction: column;
-            align-items: center; gap: 4px; transition: all 0.3s ease;
+            align-items: center; gap: 4px; transition: all 0.2s ease;
+            width: 20%; text-align: center;
         }
         .nav-btn span { font-size: 18px; }
         
-        /* க்ளிக் செய்யும்போது பட்டன் நிறம் மாறும் CSS மேஜிக் */
+        /* ஆக்டிவ் டேப் ஸ்டைல் மேஜிக் */
         #tab1:checked ~ .bottom-nav label[for="tab1"],
         #tab2:checked ~ .bottom-nav label[for="tab2"],
         #tab3:checked ~ .bottom-nav label[for="tab3"],
         #tab4:checked ~ .bottom-nav label[for="tab4"] {
-            color: #38bdf8; text-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+            color: #38bdf8; text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
         }
     </style>
 </head>
 <body>
 
     <div class="phone-shell">
-        <!-- ரேடியோ பட்டன் கண்ட்ரோலர்கள் -->
+        <!-- ரேடியோ பட்டன்கள் -->
         <input type="radio" id="tab1" name="os-tabs" checked>
         <input type="radio" id="tab2" name="os-tabs">
         <input type="radio" id="tab3" name="os-tabs">
         <input type="radio" id="tab4" name="os-tabs">
 
-        <!-- ஸ்பிளாஷ் பூட்டிங் ஸ்கிரீன் -->
+        <!-- ஸ்பிளாஷ் ஸ்கிரீன் -->
         <div class="splash-screen">
             <h2 style="letter-spacing: 2px; font-weight: 800; color: #38bdf8; font-size: 20px;">PRASANTH OS</h2>
             <div class="loader-bar"><div class="loader-fill"></div></div>
         </div>
 
-        <!-- டாப் ஸ்டேட்டஸ் பார் -->
+        <!-- டாப் பார் -->
         <div class="status-bar">
-            <div>Views: <span>1,542</span></div>
-            <div id="osClock" style="font-weight: 700;">00:03</div>
+            <div>Views: 1,542</div>
+            <div id="osClock" style="font-weight: 700;">00:08</div>
         </div>
 
-        <!-- மெயின் கன்டென்ட் விண்டோஸ் -->
+        <!-- மெயின் ஆப் கன்டென்ட் பாக்ஸ் -->
         <div class="app-content">
             
             <!-- T1: HOME -->
             <div id="homeTab" class="tab-content">
                 <div class="profile-widget">
                     <div class="avatar-ring">
-                        <!-- ImgBB நேரடி அசல் லிங்க் (கேள்விக்குறி வராதவாறு சரிசெய்யப்பட்டது) -->
-                        <img src="https://ibb.co" alt="Prasanth" class="avatar-img">
+                        <!-- போட்டோ வரவில்லை என்றால் தானாகவே ஒரு கூல் எமோஜி லோகோ காட்டும் இமேஜ் டேக் -->
+                        <img src="https://ibb.co" alt="👤" class="avatar-img" onerror="this.style.display='none'; this.parentNode.innerText='👑'; this.parentNode.style.fontSize='28px';">
                     </div>
                     <div>
                         <div style="font-weight: 800; font-size: 16px; letter-spacing: 0.5px;">PRASANTH GOD</div>
@@ -226,7 +229,7 @@
                 </div>
                 
                 <div class="list-card" style="background: rgba(30, 41, 59, 0.4);">
-                    <p style="color: #e2e8f0; margin: 0;">Naan Koder App வழியா ரொம்ப வெறியா கோடிங் கத்துக்க ஸ்டார்ட் பண்ணிட்டேன்! கீழே இருக்குற பட்டன்களை க்ளிக் பண்ணி என்னோட ஆப்ஸ் மற்றும் ஸ்கில்களைப் பாருங்க!</p>
+                    <p style="color: #e2e8f0; margin: 0; font-size: 13px;">Naan Koder App வழியா ரொம்ப வெறியா கோடிங் கத்துக்க ஸ்டார்ட் பண்ணிட்டேன்! கீழே இருக்குற பட்டன்களை க்ளிக் பண்ணி என்னோட ஆப்ஸ் மற்றும் ஸ்கில்களைப் பாருங்க!</p>
                 </div>
             </div>
 
