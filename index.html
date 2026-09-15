@@ -30,7 +30,7 @@
             100% { transform: translate(-50px, -50px); }
         }
         
-        /* மெயின் ஆப் செல் */
+        /* மெயின் போன் ஷெல் லேஅவுட் */
         .phone-shell {
             background: rgba(15, 23, 42, 0.85);
             border-radius: 36px;
@@ -47,7 +47,7 @@
             z-index: 1;
         }
         
-        /* லோடிங் பார் ஸ்கிரீன் */
+        /* ஸ்பிளாஷ் ஸ்கிரீன் */
         .splash-screen {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -70,7 +70,7 @@
         @keyframes load { to { width: 100%; } }
         @keyframes hideSplash { to { opacity: 0; visibility: hidden; pointer-events: none; } }
 
-        /* டாப் ஸ்டேட்டஸ் பார் */
+        /* டாப் பார் */
         .status-bar {
             background: rgba(30, 41, 59, 0.4);
             padding: 10px 20px;
@@ -80,14 +80,15 @@
             font-size: 11px;
             color: #38bdf8;
             border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+            flex-shrink: 0;
         }
 
-        /* கன்டென்ட் விண்டோ - பாட்டம் பாருக்கு மேலே கச்சிதமாக நிக்கும் */
+        /* மெயின் கன்டென்ட் பாக்ஸ் */
         .app-content {
             padding: 20px;
             flex-grow: 1;
             overflow-y: auto;
-            height: calc(100% - 110px); 
+            box-sizing: border-box;
         }
         
         /* பக்கா சிஎஸ்எஸ் டேப் சுவிட்ச்சிங் */
@@ -99,7 +100,7 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* ப்ரொஃபைல் கார்டு விட்ஜெட் */
+        /* ப்ரொஃபைல் கார்டு */
         .profile-widget {
             background: rgba(30, 41, 59, 0.5);
             border-radius: 20px;
@@ -149,23 +150,23 @@
         .bar-bg { background: rgba(255,255,255,0.1); height: 7px; border-radius: 5px; overflow: hidden; }
         .bar-fill { height: 100%; background: linear-gradient(to right, #00f2fe, #4facfe); }
 
-        /* 📱 பாட்டம் நேவிகேஷன் பார் - கன்டென்டுக்கு வெளியே தனியாக கீழே நிக்கும் */
+        /* 📱 பாட்டம் நேவிகேஷன் பார் - கன்டென்டுக்கு வெளியே கச்சிதமாக கீழே இருக்கும் */
         input[type="radio"] { display: none; }
         .bottom-nav {
-            position: absolute; bottom: 0; left: 0; width: 100%;
             background: #090d16;
-            display: flex; justify-content: space-around;
-            padding: 14px 0 18px 0;
+            display: flex; 
+            justify-content: space-around;
+            padding: 12px 0 16px 0;
             border-top: 1px solid rgba(56, 189, 248, 0.25);
-            border-radius: 0 0 36px 36px;
-            z-index: 5;
+            flex-shrink: 0;
             box-sizing: border-box;
+            z-index: 5;
         }
         .nav-btn {
             color: #64748b; font-size: 11px; font-weight: 600;
             cursor: pointer; display: flex; flex-direction: column;
             align-items: center; gap: 4px; transition: all 0.2s ease;
-            width: 20%; text-align: center;
+            width: 25%; text-align: center;
         }
         .nav-btn span { font-size: 18px; }
         
@@ -206,7 +207,7 @@
             <div id="homeTab" class="tab-content">
                 <div class="profile-widget">
                     <div class="avatar-ring">
-                        <!-- போட்டோ வரவில்லை என்றால் தானாகவே ஒரு கூல் எமோஜி லோகோ காட்டும் இமேஜ் டேக் -->
+                        <!-- போட்டோ வரவில்லை என்றால் தானாகவே ஒரு அழகான கிரீடம் '👑' லோகோ காட்டும் விட்ஜெட் -->
                         <img src="https://ibb.co" alt="👤" class="avatar-img" onerror="this.style.display='none'; this.parentNode.innerText='👑'; this.parentNode.style.fontSize='28px';">
                     </div>
                     <div>
@@ -235,3 +236,4 @@
 
             <!-- T2: APPS -->
             <div id="projectsTab" class="tab-content">
+                <div class="section-title">My Built Apps 💼</div>
