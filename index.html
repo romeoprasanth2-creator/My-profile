@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Prasanth Ultimate App</title>
+    <title>Prasanth Ultimate OS App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+            background: radial-gradient(circle at center, #0b1329 0%, #020617 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
@@ -13,46 +13,89 @@
             min-height: 100vh;
             margin: 0;
             color: #ffffff;
-            overflow-x: hidden;
+            overflow: hidden;
         }
-        /* பின்னணியில் மெதுவாக நகரும் டிஜிட்டல் அலைகள் */
+        /* ஹைடெக் மேட்ரிக்ஸ் பின்னணி எஃபெக்ட் */
         body::before {
             content: '';
             position: absolute;
-            width: 150%;
-            height: 150%;
-            background: linear-gradient(45deg, transparent 45%, rgba(56, 189, 248, 0.05) 50%, transparent 55%);
-            background-size: 200% 200%;
-            animation: waveMove 8s linear infinite;
+            width: 200%;
+            height: 200%;
+            background-image: radial-gradient(rgba(56, 189, 248, 0.08) 1px, transparent 0);
+            background-size: 24px 24px;
+            animation: bgScroll 20s linear infinite;
             z-index: 0;
         }
-        @keyframes waveMove {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+        @keyframes bgScroll {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50px, -50px); }
         }
-        .app-container {
-            background: rgba(15, 23, 42, 0.8);
-            padding: 40px 25px;
-            border-radius: 28px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(56, 189, 248, 0.15);
-            text-align: center;
+        .app-phone-shell {
+            background: rgba(15, 23, 42, 0.75);
+            border-radius: 36px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 40px rgba(56, 189, 248, 0.2);
             max-width: 360px;
-            width: 90%;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            backdrop-filter: blur(16px);
-            z-index: 1;
+            width: 92%;
+            height: 620px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            backdrop-filter: blur(25px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
-        /* 3D நியான் குளோ ரிங் */
+        /* டாப் ஸ்டேட்டஸ் பார் விட்ஜெட் */
+        .status-bar {
+            background: rgba(30, 41, 59, 0.4);
+            padding: 8px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: #38bdf8;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #22c55e;
+            display: inline-block;
+            margin-right: 5px;
+            animation: pulse 1.5s infinite alternate;
+        }
+        @keyframes pulse { 0% { opacity: 0.4; } 100% { opacity: 1; } }
+
+        /* மெயின் கன்டென்ட் ஏரியா */
+        .app-content {
+            padding: 20px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        .tab-content {
+            display: none;
+            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        .tab-content.active { display: block; }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* HOME TAB */
         .avatar-wrapper {
             position: relative;
-            width: 110px;
-            height: 110px;
-            margin: 0 auto 20px auto;
+            width: 105px;
+            height: 105px;
+            margin: 10px auto 15px auto;
             border-radius: 50%;
             background: linear-gradient(45deg, #00f2fe, #4facfe, #6366f1);
             padding: 4px;
-            animation: glowRotate 4s linear infinite;
+            animation: glowRotate 5s linear infinite;
         }
         .avatar-img {
             width: 100%;
@@ -64,127 +107,155 @@
         }
         @keyframes glowRotate {
             0% { transform: rotate(0deg); box-shadow: 0 0 20px #00f2fe; }
-            50% { box-shadow: 0 0 35px #6366f1; }
             100% { transform: rotate(360deg); box-shadow: 0 0 20px #00f2fe; }
         }
         h1 {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 800;
-            margin: 10px 0 5px 0;
-            letter-spacing: 1px;
+            margin: 5px 0;
             background: linear-gradient(to right, #ffffff, #38bdf8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-align: center;
         }
-        .bio {
-            color: #94a3b8;
-            font-size: 14px;
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-        /* கவுண்டர் விட்ஜெட் ஸ்டைல் */
-        .counter-box {
-            background: rgba(30, 41, 59, 0.5);
-            padding: 8px 15px;
-            border-radius: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 12px;
-            color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.1);
-            margin-bottom: 25px;
-        }
-        .pulse-dot {
-            width: 6px;
-            height: 6px;
-            background-color: #22c55e;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #22c55e;
-            animation: pulse 1.5s infinite alternate;
-        }
-        @keyframes pulse {
-            0% { transform: scale(0.9); opacity: 0.6; }
-            100% { transform: scale(1.2); opacity: 1; }
-        }
-        .links-group {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .app-link {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            color: #38bdf8;
-            text-decoration: none;
-            padding: 16px;
-            border-radius: 16px;
-            font-size: 15px;
-            font-weight: 600;
-            border: 1px solid rgba(56, 189, 248, 0.1);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: block;
-        }
-        .app-link:hover {
-            border: 1px solid #38bdf8;
-            color: #ffffff;
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.25);
-        }
-        /* வாட்ஸ்அப் பட்டனுக்கான பிரத்யேக ஸ்டைல் */
-        .whatsapp-btn {
-            background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+        .title-tag {
             color: #22c55e;
-            border: 1px solid rgba(34, 197, 94, 0.2);
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .whatsapp-btn:hover {
-            border: 1px solid #22c55e;
-            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.25);
+        .bio-box {
+            background: rgba(30, 41, 59, 0.4);
+            padding: 15px;
+            border-radius: 16px;
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: #94a3b8;
+            border: 1px solid rgba(56, 189, 248, 0.1);
         }
-        .footer-text {
-            margin-top: 35px;
-            font-size: 11px;
-            color: #64748b;
+
+        /* PROJECTS & CARDS */
+        .section-title {
+            font-size: 17px;
+            color: #38bdf8;
+            margin-bottom: 15px;
+            font-weight: 700;
             letter-spacing: 0.5px;
         }
+        .card-list { display: flex; flex-direction: column; gap: 12px; }
+        .item-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.7) 100%);
+            padding: 15px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+        .item-card:hover {
+            border: 1px solid #38bdf8;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
+        }
+        .item-card h3 { margin: 0 0 5px 0; font-size: 15px; color: #38bdf8; }
+        .item-card p { margin: 0; font-size: 12.5px; color: #94a3b8; line-height: 1.5; }
+
+        /* SKILLS PROGRESS BAR */
+        .skill-item { margin-bottom: 15px; }
+        .skill-info { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px; color: #e2e8f0; }
+        .progress-bar { background: rgba(255,255,255,0.1); height: 8px; border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 10px; background: linear-gradient(to right, #00f2fe, #4facfe); }
+
+        /* PREMIUM BUTTONS */
+        .premium-btn {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            color: #ffffff !important;
+        }
+
+        /* BOTTOM NAV BAR */
+        .bottom-nav {
+            background: #090d16;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0 14px 0;
+            border-top: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 0 0 36px 36px;
+        }
+        .nav-btn {
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+        .nav-btn span { font-size: 18px; transition: transform 0.2s ease; }
+        .nav-btn.active { color: #38bdf8; }
+        .nav-btn.active span { transform: scale(1.15); text-shadow: 0 0 10px #38bdf8; }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        <!-- உங்களது மாஸான அசல் புகைப்பட லிங்க் -->
-        <div class="avatar-wrapper">
-            <img src="https://ibb.co" alt="Prasanth" class="avatar-img">
+    <div class="app-phone-shell">
+        <!-- டாப் ஸ்டேட்டஸ் பார் (Live விட்ஜெட்டுகள்) -->
+        <div class="status-bar">
+            <div><span class="live-dot"></span>Views: <span id="views">1,540</span></div>
+            <div id="clock" style="font-weight: 700; letter-spacing: 0.5px;">00:00</div>
         </div>
-        
-        <h1>PRASANTH GOD</h1>
-        <p class="bio">Advanced Mobile Coder 📱<br>Naan Koder App வழியா கோடிங் கத்துக்கிட்டு உருவாக்கிய அல்டிமேட் வெப் ஆப்!</p>
-        
-        <!-- லைவ் விசிட்டர்ஸ் கவுண்டர் விட்ஜெட் -->
-        <div class="counter-box">
-            <span class="pulse-dot"></span>
-            <span>Profile Views: <strong id="viewCount">1,482</strong></span>
-        </div>
-        
-        <div class="links-group">
-            <a href="https://instagram.com" target="_blank" class="app-link">My Instagram 📸</a>
-            <a href="https://github.com" target="_blank" class="app-link">My GitHub Projects 💻</a>
-            
-            <!-- புதிய வாட்ஸ்அப் குவிக் சாட் பட்டன் -->
-            <a href="https://wa.me" target="_blank" class="app-link whatsapp-btn">Chat on WhatsApp 💬</a>
-        </div>
-        
-        <div class="footer-text">Upgraded by Prasanth • Powered by Vercel</div>
-    </div>
 
-    <script>
-        // பக்கத்தை ஓப்பன் செய்யும் போது விசிட்டர்ஸ் எண்ணிக்கை லேசாக மாறுவது போன்ற சிமுலேஷன் ஸ்கிரிப்ட்
-        document.addEventListener("DOMContentLoaded", () => {
-            const countEl = document.getElementById("viewCount");
-            let currentCount = parseInt(countEl.innerText.replace(',', ''));
-            // சீரற்ற முறையில் வியூஸ்களை கூட்டுதல்
-            currentCount += Math.floor(Math.random() * 5) + 1;
-            countEl.innerText = currentCount.toLocaleString();
-        });
-    </script>
-</body>
-</html>
+        <div class="app-content">
+            
+            <!-- T1: HOME -->
+            <div id="homeTab" class="tab-content active">
+                <div class="avatar-wrapper">
+                    <img src="https://ibb.co" alt="Prasanth" class="avatar-img">
+                </div>
+                <h1>PRASANTH GOD</h1>
+                <div class="title-tag">Full-Stack Explorer 🚀</div>
+                <div class="bio-box">
+                    Naan Koder App வழியா ரொம்ப வெறியா கோடிங் கத்துக்க ஸ்டார்ட் பண்ணிட்டேன்! ஒரே ஸ்கிரீனுக்குள்ள எல்லா வசதிகளும் இருக்குற என்னோட அல்டிமேட் பிரீமியம் ஓஎஸ் வெப் ஆப் இது.
+                </div>
+            </div>
+
+            <!-- T2: PROJECTS -->
+            <div id="projectsTab" class="tab-content">
+                <div class="section-title">My Built Apps 💼</div>
+                <div class="card-list">
+                    <div class="item-card">
+                        <h3>Prasanth Neon Card App 📱</h3>
+                        <p>ImgBB கிளவுட் ஸ்டோரேஜ் மற்றும் சுழலும் நியான் விளக்கு வளையத்துடன் கூடிய உங்களது சொந்த மெயின் ஆப்.</p>
+                    </div>
+                    <a href="https://github.com" target="_blank" class="item-card">
+                        <h3>Aswin Shortcuts App 🏗️</h3>
+                        <p>நண்பர் அஸ்வினுக்காக NestStay AI & Shree Aswin Housing இணைப்புகளை இணைத்து உருவாக்கப்பட்ட தளம்.</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- T3: SKILLS -->
+            <div id="skillsTab" class="tab-content">
+                <div class="section-title">Tech Skills Hub ⚡</div>
+                <div class="bio-box" style="margin-bottom: 20px; font-size: 12.5px;">
+                    தற்போது நான் மிகத் தீவிரமாக கற்றுக்கொண்டு, செயலிகளில் பயன்படுத்தி வரும் தொழில்நுட்பங்களின் தற்போதைய நிலை:
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span>HTML5 (Structure)</span><span>95%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 95%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span>CSS3 (Neon Animations)</span><span>85%</span></div>
