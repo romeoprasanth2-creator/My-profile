@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Prasanth Ultimate OS App</title>
+    <title>Prasanth Advanced OS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
@@ -15,7 +15,6 @@
             color: #ffffff;
             overflow: hidden;
         }
-        /* ஹைடெக் மேட்ரிக்ஸ் பின்னணி எஃபெக்ட் */
         body::before {
             content: '';
             position: absolute;
@@ -23,33 +22,54 @@
             height: 200%;
             background-image: radial-gradient(rgba(56, 189, 248, 0.08) 1px, transparent 0);
             background-size: 24px 24px;
-            animation: bgScroll 20s linear infinite;
+            animation: bgScroll 25s linear infinite;
             z-index: 0;
         }
         @keyframes bgScroll {
             0% { transform: translate(0, 0); }
             100% { transform: translate(-50px, -50px); }
         }
-        .app-phone-shell {
-            background: rgba(15, 23, 42, 0.75);
-            border-radius: 36px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 40px rgba(56, 189, 248, 0.2);
+        .phone-shell {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 40px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 40px rgba(56, 189, 248, 0.25);
             max-width: 360px;
             width: 92%;
-            height: 620px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            height: 640px;
+            border: 2px solid rgba(56, 189, 248, 0.3);
             backdrop-filter: blur(25px);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             position: relative;
             overflow: hidden;
             z-index: 1;
         }
-        /* டாப் ஸ்டேட்டஸ் பார் விட்ஜெட் */
+        /* ஸ்பிளாஷ் ஸ்கிரீன் பூட்டிங் அனிமேஷன் */
+        .splash-screen {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #020617;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            transition: opacity 0.6s ease;
+        }
+        .loader-bar {
+            width: 150px; height: 4px; background: rgba(255,255,255,0.1);
+            border-radius: 2px; margin-top: 20px; overflow: hidden;
+        }
+        .loader-fill {
+            width: 0%; height: 100%; background: #38bdf8;
+            animation: load 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        @keyframes load { to { width: 100%; } }
+
+        /* டாப் ஸ்டேட்டஸ் பார் */
         .status-bar {
             background: rgba(30, 41, 59, 0.4);
-            padding: 8px 18px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -57,205 +77,172 @@
             color: #38bdf8;
             border-bottom: 1px solid rgba(56, 189, 248, 0.15);
         }
-        .live-dot {
-            width: 6px;
-            height: 6px;
-            background-color: #22c55e;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #22c55e;
-            display: inline-block;
-            margin-right: 5px;
-            animation: pulse 1.5s infinite alternate;
+        /* நோட்டிபிகேஷன் பேனர் */
+        .noti-banner {
+            background: rgba(56, 189, 248, 0.95);
+            color: #020617;
+            padding: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            text-align: center;
+            position: absolute;
+            top: -50px; left: 5%; width: 90%;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            z-index: 5;
+            transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        @keyframes pulse { 0% { opacity: 0.4; } 100% { opacity: 1; } }
-
-        /* மெயின் கன்டென்ட் ஏரியா */
-        .app-content {
+        /* மெயின் ஹோம் ஸ்கிரீன் லேஅவுட் */
+        .home-screen {
             padding: 20px;
-            flex-grow: 1;
-            overflow-y: auto;
-        }
-        .tab-content {
-            display: none;
-            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        .tab-content.active { display: block; }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* HOME TAB */
-        .avatar-wrapper {
-            position: relative;
-            width: 105px;
-            height: 105px;
-            margin: 10px auto 15px auto;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #00f2fe, #4facfe, #6366f1);
-            padding: 4px;
-            animation: glowRotate 5s linear infinite;
-        }
-        .avatar-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            background: #0f172a;
-            display: block;
-        }
-        @keyframes glowRotate {
-            0% { transform: rotate(0deg); box-shadow: 0 0 20px #00f2fe; }
-            100% { transform: rotate(360deg); box-shadow: 0 0 20px #00f2fe; }
-        }
-        h1 {
-            font-size: 24px;
-            font-weight: 800;
-            margin: 5px 0;
-            background: linear-gradient(to right, #ffffff, #38bdf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-align: center;
-        }
-        .title-tag {
-            color: #22c55e;
-            font-size: 13px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .bio-box {
-            background: rgba(30, 41, 59, 0.4);
-            padding: 15px;
-            border-radius: 16px;
-            font-size: 13.5px;
-            line-height: 1.6;
-            color: #94a3b8;
-            border: 1px solid rgba(56, 189, 248, 0.1);
-        }
-
-        /* PROJECTS & CARDS */
-        .section-title {
-            font-size: 17px;
-            color: #38bdf8;
-            margin-bottom: 15px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-        .card-list { display: flex; flex-direction: column; gap: 12px; }
-        .item-card {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.7) 100%);
-            padding: 15px;
-            border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: white;
-            display: block;
-        }
-        .item-card:hover {
-            border: 1px solid #38bdf8;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
-        }
-        .item-card h3 { margin: 0 0 5px 0; font-size: 15px; color: #38bdf8; }
-        .item-card p { margin: 0; font-size: 12.5px; color: #94a3b8; line-height: 1.5; }
-
-        /* SKILLS PROGRESS BAR */
-        .skill-item { margin-bottom: 15px; }
-        .skill-info { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px; color: #e2e8f0; }
-        .progress-bar { background: rgba(255,255,255,0.1); height: 8px; border-radius: 10px; overflow: hidden; }
-        .progress-fill { height: 100%; border-radius: 10px; background: linear-gradient(to right, #00f2fe, #4facfe); }
-
-        /* PREMIUM BUTTONS */
-        .premium-btn {
-            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-            text-align: center;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-        .whatsapp-btn {
-            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-            color: #ffffff !important;
-        }
-
-        /* BOTTOM NAV BAR */
-        .bottom-nav {
-            background: #090d16;
             display: flex;
-            justify-content: space-around;
-            padding: 10px 0 14px 0;
-            border-top: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 0 0 36px 36px;
+            flex-direction: column;
+            gap: 20px;
+            height: 100%;
+            box-sizing: border-box;
         }
-        .nav-btn {
-            background: none;
-            border: none;
-            color: #64748b;
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
+        /* ப்ரொஃபைல் விட்ஜெட் */
+        .profile-widget {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 20px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .avatar-ring {
+            width: 65px; height: 65px; border-radius: 50%;
+            background: linear-gradient(45deg, #00f2fe, #6366f1);
+            padding: 2px;
+        }
+        .avatar-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+        
+        /* மியூசிக் விட்ஜெட் */
+        .music-widget {
+            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+            border-radius: 20px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        .visualizer { display: flex; gap: 3px; align-items: flex-end; height: 20px; }
+        .bar { width: 3px; height: 5px; background: #38bdf8; animation: bounce 0.6s ease infinite alternate; }
+        @keyframes bounce { 100% { height: 20px; } }
+
+        /* ஆப் கிரிட் லான்ச்சர் */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .app-icon-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
         }
-        .nav-btn span { font-size: 18px; transition: transform 0.2s ease; }
-        .nav-btn.active { color: #38bdf8; }
-        .nav-btn.active span { transform: scale(1.15); text-shadow: 0 0 10px #38bdf8; }
+        .icon-shape {
+            width: 55px; height: 55px; border-radius: 14px;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 24px; font-weight: 700;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .app-icon-wrapper:hover .icon-shape { transform: scale(1.1); }
+        .app-label { font-size: 11px; margin-top: 6px; font-weight: 600; color: #94a3b8; }
+
+        /* இன்-ஆப் விண்டோ சிஸ்டம் */
+        .app-window {
+            position: absolute;
+            top: 100%; left: 0; width: 100%; height: calc(100% - 36px);
+            background: #0f172a;
+            z-index: 4;
+            transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+        .app-window.open { top: 36px; }
+        .window-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-bottom: 15px; border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+            margin-bottom: 15px;
+        }
+        .back-btn { background: none; border: none; color: #38bdf8; font-size: 14px; font-weight: 700; cursor: pointer; }
+        
+        /* ஸ்கில்ஸ் பார் மற்றும் லிஸ்டுகள் */
+        .skill-item { margin-bottom: 15px; }
+        .skill-info { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }
+        .bar-bg { background: rgba(255,255,255,0.1); height: 6px; border-radius: 4px; overflow: hidden; }
+        .bar-fill { height: 100%; background: #38bdf8; }
+        
+        .list-card {
+            background: rgba(30, 41, 59, 0.6); padding: 12px; border-radius: 12px;
+            margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05);
+            text-decoration: none; color: white; display: block;
+        }
+        .list-card h4 { margin: 0 0 4px 0; color: #38bdf8; font-size: 14px; }
+        .list-card p { margin: 0; font-size: 12px; color: #94a3b8; }
     </style>
 </head>
 <body>
 
-    <div class="app-phone-shell">
-        <!-- டாப் ஸ்டேட்டஸ் பார் (Live விட்ஜெட்டுகள்) -->
-        <div class="status-bar">
-            <div><span class="live-dot"></span>Views: <span id="views">1,540</span></div>
-            <div id="clock" style="font-weight: 700; letter-spacing: 0.5px;">00:00</div>
+    <div class="phone-shell">
+        <!-- ஸ்பிளாஷ் பூட்டிங் ஸ்கிரீன் -->
+        <div id="splash" class="splash-screen">
+            <h2 style="letter-spacing: 2px; font-weight: 800; color: #38bdf8; font-size: 20px;">PRASANTH OS</h2>
+            <div class="loader-bar"><div class="loader-fill"></div></div>
         </div>
 
-        <div class="app-content">
-            
-            <!-- T1: HOME -->
-            <div id="homeTab" class="tab-content active">
-                <div class="avatar-wrapper">
+        <!-- சிஸ்டம் நோட்டிபிகேஷன் பேனர் -->
+        <div id="noti" class="noti-banner">⚡ 1 New Coding Milestone Achieved!</div>
+
+        <!-- டாப் ஸ்டேட்டஸ் பார் -->
+        <div class="status-bar">
+            <div>Views: <span id="viewsCount">1,540</span></div>
+            <div id="osClock" style="font-weight: 700;">00:00</div>
+        </div>
+
+        <!-- மெயின் ஹோம் ஸ்கிரீன் -->
+        <div class="home-screen">
+            <!-- ப்ரொஃபைல் விட்ஜெட் -->
+            <div class="profile-widget">
+                <div class="avatar-ring">
+                    <!-- உங்கள் அசல் இமேஜ் லிங்க் இங்கே கச்சிதமாக வேலை செய்யும் வகையில் சரிசெய்யப்பட்டுள்ளது -->
                     <img src="https://ibb.co" alt="Prasanth" class="avatar-img">
                 </div>
-                <h1>PRASANTH GOD</h1>
-                <div class="title-tag">Full-Stack Explorer 🚀</div>
-                <div class="bio-box">
-                    Naan Koder App வழியா ரொம்ப வெறியா கோடிங் கத்துக்க ஸ்டார்ட் பண்ணிட்டேன்! ஒரே ஸ்கிரீனுக்குள்ள எல்லா வசதிகளும் இருக்குற என்னோட அல்டிமேட் பிரீமியம் ஓஎஸ் வெப் ஆப் இது.
+                <div>
+                    <div style="font-weight: 800; font-size: 16px; letter-spacing: 0.5px;">PRASANTH GOD</div>
+                    <div style="font-size: 11px; color: #22c55e; font-weight: 700; margin-top: 2px;">● SYSTEM ONLINE</div>
                 </div>
             </div>
 
-            <!-- T2: PROJECTS -->
-            <div id="projectsTab" class="tab-content">
-                <div class="section-title">My Built Apps 💼</div>
-                <div class="card-list">
-                    <div class="item-card">
-                        <h3>Prasanth Neon Card App 📱</h3>
-                        <p>ImgBB கிளவுட் ஸ்டோரேஜ் மற்றும் சுழலும் நியான் விளக்கு வளையத்துடன் கூடிய உங்களது சொந்த மெயின் ஆப்.</p>
-                    </div>
-                    <a href="https://github.com" target="_blank" class="item-card">
-                        <h3>Aswin Shortcuts App 🏗️</h3>
-                        <p>நண்பர் அஸ்வினுக்காக NestStay AI & Shree Aswin Housing இணைப்புகளை இணைத்து உருவாக்கப்பட்ட தளம்.</p>
-                    </a>
+            <!-- மியூசிக் விட்ஜெட் -->
+            <div class="music-widget">
+                <div>
+                    <div style="font-size: 13px; font-weight: 700;">Coding Beats Vol.1</div>
+                    <div style="font-size: 10px; color: #6366f1;">Lo-Fi Coding Mode</div>
+                </div>
+                <div class="visualizer">
+                    <div class="bar" style="animation-delay: 0.1s;"></div>
+                    <div class="bar" style="animation-delay: 0.3s;"></div>
+                    <div class="bar" style="animation-delay: 0.2s;"></div>
+                    <div class="bar" style="animation-delay: 0.4s;"></div>
                 </div>
             </div>
 
-            <!-- T3: SKILLS -->
-            <div id="skillsTab" class="tab-content">
-                <div class="section-title">Tech Skills Hub ⚡</div>
-                <div class="bio-box" style="margin-bottom: 20px; font-size: 12.5px;">
-                    தற்போது நான் மிகத் தீவிரமாக கற்றுக்கொண்டு, செயலிகளில் பயன்படுத்தி வரும் தொழில்நுட்பங்களின் தற்போதைய நிலை:
+            <!-- ஆப் கிரிட் லான்ச்சர் -->
+            <div class="apps-grid">
+                <div class="app-icon-wrapper" onclick="openWindow('winApps')">
+                    <div class="icon-shape" style="background: linear-gradient(135deg, #0284c7, #0369a1);">💼</div>
+                    <div class="app-label">My Apps</div>
                 </div>
-                <div class="skill-item">
-                    <div class="skill-info"><span>HTML5 (Structure)</span><span>95%</span></div>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 95%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-info"><span>CSS3 (Neon Animations)</span><span>85%</span></div>
+                <div class="app-icon-wrapper" onclick="openWindow('winSkills')">
